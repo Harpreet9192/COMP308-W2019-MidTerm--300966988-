@@ -35,7 +35,7 @@ router.get('/add', (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-
+// Create an object and then add the data to model
     let abook =book({
       "Title" : req.body.title,
       "Price" : req.body.price,
@@ -57,7 +57,7 @@ router.post('/add', (req, res, next) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
   let id = req.params.id;
- 
+ //Get the book details by id
   book.findById(id, (err, bookobj) => {
     if(err){
       console.log(err);
@@ -85,6 +85,7 @@ router.post('/:id', (req, res, next) => {
     "Author" : req.body.author,
     "Genre" : req.body.genre
   });
+  //Update the collection by matching the id of the selected item
   book.update({_id : id},update,(err) =>{
     if(err)
     {
@@ -102,6 +103,7 @@ router.post('/:id', (req, res, next) => {
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
   let id= req.params.id;
+  //Remove the item by using id
   book.remove({_id :id},(err) =>{
     if(err)
     {
